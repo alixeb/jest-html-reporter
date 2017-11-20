@@ -120,13 +120,13 @@ const renderHTML = (testData, stylesheet) => new Promise((resolve, reject) => {
         let totalNegativeTestCase = 0;
         let passedNegativeTestCase = 0;
         suite.testResults.forEach((testCase) => {
-            if (testCase.title.startsWith('P')) {
+            if (testCase.title.startsWith('P_')) {
                 if (testCase.status === 'passed') {
                     passedPositiveTestCase++;
                 }
                 totalPositiveTestCase++;
             }
-            if (testCase.title.startsWith('N')) {
+            if (testCase.title.startsWith('N_')) {
                 if (testCase.status === 'passed') {
                     passedNegativeTestCase++;
                 }
