@@ -1,6 +1,6 @@
 {
   "name": "html-jest-reporter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Jest test results processor for generating a summary in HTML",
   "main": "./src/index",
   "scripts": {
@@ -33,6 +33,7 @@
   "html-reporter-jest": {
     "pageTitle": "Test Suite",
     "outputPath": "test-report.html",
-    "includeFailureMsg": true
+    "includeFailureMsg": true,
+    "enableCategoryWiseReport": false
   }
 }

@@ -68,6 +68,7 @@ const createHtml = (stylesheet) => xmlbuilder.create({
         },
     },
 });
+
 /**
 * Returns a HTML containing the test report.
 * @param {String} stylesheet
@@ -96,16 +97,58 @@ const renderHTML = (testData, stylesheet) => new Promise((resolve, reject) => {
         ${testData.numPendingTests} pending
     `);
     let k = 1;
+    const suiteTable = htmlOutput.ele('table', { class: 'suite-table suitetablemain', cellspacing: '0', cellpadding: '0' });
+    const testSuiteTr = suiteTable.ele('tr', { class: 'passed' });
+    const testTr = suiteTable.ele('tr', { class: 'suiteHeader' });
+    testTr.ele('td', { class: 'suiteFirst' }, 'S.No');
+    testTr.ele('td', { class: 'suite' }, 'Name');
+    testTr.ele('td', { class: 'suite' }, 'TC Count');
+    if (config.enableTestReportCategory) {
+        testTr.ele('td', { class: 'suite' }, 'Positive TC Count');
+        testTr.ele('td', { class: 'suite' }, 'Negative TC Count');
+    }
+    testTr.ele('td', { class: 'suite' }, 'Passed');
+    testTr.ele('td', { class: 'suite' }, 'Failed');
     // Loop through each test suite
     testData.testResults.forEach((suite) => {
         if (!suite.testResults || suite.testResults.length <= 0) { return; }
         // Suite filepath location
         // Suite Test Table
-        const suiteTable = htmlOutput.ele('table', { class: 'suite-table', cellspacing: '0', cellpadding: '0' });
         const testTr = suiteTable.ele('tr', { class: suite.numFailingTests ? 'failed' : 'passed' });
-        testTr.ele('td', { class: 'suite' }, `${k}. ${suite.testResults[0].ancestorTitles.join(' > ')} (
-            ${suite.numPassingTests} Passed / ${suite.numFailingTests} Failed
-        )`);
+        let totalPositiveTestCase = 0;
+        let passedPositiveTestCase = 0;
+        let totalNegativeTestCase = 0;
+        let passedNegativeTestCase = 0;
+        suite.testResults.forEach((testCase) => {
+            if (testCase.title.startsWith('P')) {
+                if (testCase.status === 'passed') {
+                    passedPositiveTestCase++;
+                }
+                totalPositiveTestCase++;
+            }
+            if (testCase.title.startsWith('N')) {
+                if (testCase.status === 'passed') {
+                    passedNegativeTestCase++;
+                }
+                totalNegativeTestCase++;
+            }
+        })
+        const testTr1 = suiteTable.ele('tr', { class: suite.numFailingTests ? 'failedTestRow' : 'passedTestRow' });
+        testTr1.ele('td', { class: 'suiteFirst' }, k);
+        testTr1.ele('td', { class: 'suite' }, suite.testResults[0].ancestorTitles.join(' > '));
+        testTr1.ele('td', { class: 'suite' }, suite.testResults.length);
+        if (config.enableTestReportCategory) {
+            testTr1.ele('td', { class: 'suite' }, totalPositiveTestCase);
+            testTr1.ele('td', { class: 'suite' }, totalNegativeTestCase);
+            testTr1.ele('td', { class: 'suite' }, `P = ${passedPositiveTestCase} N = ${passedNegativeTestCase}`);
+            testTr1.ele('td', { class: 'suite' }, `P = ${totalPositiveTestCase - passedPositiveTestCase} N = ${totalNegativeTestCase - passedNegativeTestCase}`);
+        }else {
+            testTr1.ele('td', { class: 'suite' }, passedPositiveTestCase + passedNegativeTestCase);
+            testTr1.ele('td', { class: 'suite' }, suite.testResults.length - (passedPositiveTestCase + passedNegativeTestCase));
+        }
+        // testTr.ele('td', { class: 'suite' }, `${k}. ${suite.testResults[0].ancestorTitles.join(' > ')}
+        //     ${passedPositiveTestCase}/${totalPositiveTestCase} Positive Testcases Passed / ${passedNegativeTestCase}/${totalNegativeTestCase} Negative Testcases Passed
+        // `);
         k++;
     });
     // Loop through each test suite

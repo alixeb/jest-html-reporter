@@ -2,12 +2,12 @@
 **A [jest](https://github.com/facebook/jest) test results processor for generating a summary in HTML.**
 
 
-This plugin was inspired by [html-jest-reporter](https://github.com/Hargne/jest-html-reporter)
+This plugin was inspired by [jest-html-reporter](https://github.com/Hargne/jest-html-reporter) by Johan Hargne
 
 ## Additional Usage of the Plugin
 This plugin combines all the Test suite and shows the report in the combined manner at the Top.
 It can also show the report on the basis of Number of Positive and Negative Test cases (Pre Condition:
-You will have to prefix your test case name by P or N)
+You will have to prefix your test case name by P_ (For positive Test case) or N (For negative Test case))
 
 ## Installation
 ```shell
@@ -35,10 +35,10 @@ This plugin is compatible with Node version `^4.8.3`
 ## Configuration
 The configurations are done directly within your *package.json* file
 
-### pageTitle (string)
-*[Default: "Test Suite"]*
+### enableCategoryWiseReport (boolean)
+*[Default: false]*
 
-The title of the document. This string will also be outputted on the top of the page.
+This flag enabled the test case category (Positive or Negative) wise reporting.
 
 ### outputPath (string)
 *[Default: "./test-report.html"]*
@@ -54,7 +54,8 @@ The path to where the plugin will output the HTML report. The path must include 
 		"pageTitle": "Your test suite",
 		"outputPath": "test-report/index.html",
 		"includeFailureMsg": false,
-		"styleOverridePath": "src/teststyle.css"
+		"styleOverridePath": "src/teststyle.css",
+		"enableCategoryWiseReport": true
 	}
 }
 ```
