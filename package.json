@@ -30,7 +30,7 @@
     "jest": "^21.2.1",
     "jshint": "^2.9.5"
   },
-  "jest-html-reporter": {
+  "html-reporter-jest": {
     "pageTitle": "Test Suite",
     "outputPath": "test-report.html",
     "includeFailureMsg": true
