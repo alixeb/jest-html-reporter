@@ -7,14 +7,14 @@ describe('methods', () => {
 			expect.assertions(1);
 			return methods.createReport(_mockdata.jestTestData, 'test-report.html')
 			.then(response => {
-				expect(response.logMsg).toEqual('jest-html-reporter >> Report generated (test-report.html)');
+				expect(response.logMsg).toEqual('html-jest-reporter >> Report generated (test-report.html)');
 			});
 		});
 		it('should log errors', () => {
 			expect.assertions(1);
 			return methods.createReport()
 			.then(response => {
-				expect(response.logMsg).toEqual('jest-html-reporter >> Test data missing or malformed');
+				expect(response.logMsg).toEqual('html-jest-reporter >> Test data missing or malformed');
 			});
 		});
 	});
@@ -34,7 +34,7 @@ describe('methods', () => {
 			const log = methods.logMessage('success', 'msg');
 			// Then
 			expect(log.logColor).toEqual('\x1b[32m');
-			expect(log.logMsg).toEqual('jest-html-reporter >> msg');
+			expect(log.logMsg).toEqual('html-jest-reporter >> msg');
 		});
 		it('should set the log type to default if none or an invalid type was provided', () => {
 			// Given

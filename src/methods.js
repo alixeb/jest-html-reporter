@@ -10,7 +10,7 @@ const defaultStylesheet = require('./style');
 */
 const packageJson = require(path.join(process.cwd(), 'package.json'));
 const config = {};
-try { const cfg = (packageJson || {})['jest-html-reporter']; if (cfg) { Object.assign(config, cfg); } }
+try { const cfg = (packageJson || {})['html-jest-reporter']; if (cfg) { Object.assign(config, cfg); } }
 catch (e) { /** do nothing */ }
 /**
 * Logs a message of a given type in the terminal
@@ -21,7 +21,7 @@ catch (e) { /** do nothing */ }
 const logMessage = (type, msg) => {
     const types = { default: '\x1b[37m', success: '\x1b[32m', error: '\x1b[31m' };
     const logColor = (!types[type]) ? types.default : types[type];
-    const logMsg = `jest-html-reporter >> ${msg}`;
+    const logMsg = `html-jest-reporter >> ${msg}`;
     console.log(logColor, logMsg);
     return { logColor, logMsg }; // Return for testing purposes
 };
