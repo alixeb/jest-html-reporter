@@ -1,6 +1,6 @@
 {
   "name": "html-jest-reporter",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Jest test results processor for generating a summary in HTML",
   "main": "./src/index",
   "scripts": {
