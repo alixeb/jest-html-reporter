@@ -4,10 +4,16 @@
 
 This plugin was inspired by [jest-html-reporter](https://github.com/Hargne/jest-html-reporter) by Johan Hargne
 
+Test Report with <enableCategoryWiseReport> flag enabled:
+![screenshot](https://s18.postimg.org/v7em5oii1/Screen_Shot_2017-11-20_at_9.33.24_PM.png)
+	
+Test Report with <enableCategoryWiseReport> flag disabled:
+![screenshot](https://s18.postimg.org/e6vpx7ft5/Screen_Shot_2017-11-20_at_9.33.49_PM.png)
+
 ## Additional Usage of the Plugin
 This plugin combines all the Test suite and shows the report in the combined manner at the Top.
 It can also show the report on the basis of Number of Positive and Negative Test cases (Pre Condition:
-You will have to prefix your test case name by P_ (For positive Test case) or N (For negative Test case))
+You will have to prefix your test case name by P_ (For positive Test case) or N_ (For negative Test case))
 
 ## Installation
 ```shell
